@@ -44,11 +44,15 @@ app.post("/auth/register", upload.single("picture"), register);
 app.use("/auth", authRoutes);
 
 const PORT = process.env.PORT || 3001;
-mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() =>
-    app.listen(PORT, () =>
-      console.log(`Running on PORT: http://localhost:${PORT}`)
+try {
+  mongoose
+    .connect(process.env.MONGO_URL)
+    .then(() =>
+      app.listen(PORT, () =>
+        console.log(`Running on PORT: http://localhost:${PORT}`)
+      )
     )
-  )
-  .catch((error) => console.log("Error", error));
+    .catch((error) => console.log("Error", error));
+} catch (error) {
+  console.log("Error", error);
+}
