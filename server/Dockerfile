@@ -1,10 +1,12 @@
-FROM node:20
+FROM node:alpine
 
 WORKDIR /usr/src/app/server
 
-COPY . .
+COPY package*.json .
 
 RUN npm install
+
+COPY . .
 
 EXPOSE 3001
 
